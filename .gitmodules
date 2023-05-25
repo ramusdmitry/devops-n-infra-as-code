@@ -1,0 +1,3 @@
+[submodule "devops/infrastructure"]
+	path = devops/infrastructure
+	url = https://gitlab.com/hse_students/hse_ramus/devops/infrastructure.git
