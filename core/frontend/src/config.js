@@ -1,0 +1,12 @@
+const CHAT_PORT = "8040"
+const POST_PORT = "8036"
+const AUTH_PORT = "8080"
+const COMM_PORT = "8032"
+const GROUP_PORT = "8050"
+const HOST = "localhost"
+export const CHAT_URL = `ws://chat:${CHAT_PORT}/room`
+export const POST_URL = `http://posts:${POST_PORT}/api/posts`
+export const AUTH_URL = `http://auth:${AUTH_PORT}/api/auth`
+//export const AUTH_URL = "http://user-app:8000/api/auth"
+export const COMM_URL = `http://comms:${COMM_PORT}/api/comms`
+export const GROUP_URL = `http://group:${GROUP_PORT}/api/group`
