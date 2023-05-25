@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.applicationName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.applicationName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.applicationName  }}
+    spec:
+      containers:
+        - name: {{ .Values.applicationName }}
+          imagePullPolicy: {{ .Values.container.imagePullPolicy }}
+          image: {{ .Values.container.image }}
+
+          livenessProbe:
+            httpGet:
+              path: /liveness
+              port: {{ .Values.container.probes.port }}
+            initialDelaySeconds: {{ .Values.container.probes.delay }}
+            periodSeconds: {{ .Values.container.probes.period }}
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: {{ .Values.container.probes.port }}
+            initialDelaySeconds: {{ .Values.container.probes.delay }}
+            periodSeconds: {{ .Values.container.probes.period }}
+
+          env:
+            - name: "DBNAME"
+              value: {{ .Values.database.DBName }}
+            - name: "DBUSERNAME"
+              value: {{ .Values.database.Username }}
+            - name: "DBPASSWORD"
+              value: {{ .Values.database.Password }}
+            - name: "DBHOST"
+              value: {{ .Values.database.DBHost }}
+            - name: "DBPORT"
+              value: "{{ .Values.database.Port }}"
+            - name: "SSLMODE"
+              value: {{ .Values.database.SSLMode }}
+            - name: "PORT"
+              value: "{{ .Values.container.port }}"
+            - name: "PROBES_PORT"
+              value: "{{ .Values.container.probes.port }}"
+
+          ports:
+            - containerPort: {{ .Values.container.port }}
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+      imagePullSecrets:
+        - name: {{ .Values.container.imagePullSecrets }}
+
+

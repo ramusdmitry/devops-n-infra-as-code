@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat
+  namespace: hse-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat
+  template:
+    metadata:
+      labels:
+        app: chat
+    spec:
+      containers:
+        - name: chat
+          imagePullPolicy: Always
+          image: registry.gitlab.com/hse_students/hse_ramus/core/chat:main
+
+          env:
+            - name: PORT
+              value: '8040'
+            - name: PROBES_PORT
+              value: '3040'  
+
+          ports:
+             - containerPort: 8040
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+      imagePullSecrets:
+        - name: regcred

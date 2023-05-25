@@ -1,0 +1,17 @@
+applicationName: chat
+namespace: core
+
+service:
+  port: 8040
+  targetPort: 8040
+
+container:
+  imagePullPolicy: Always
+  imagePullSecrets: regcred
+  name: "chat-app-service"
+  image: registry.gitlab.com/hse_students/hse_ramus/core/chat:main
+  port: 8040
+  probes:
+    port: 3040
+    delay: 10
+    period: 5

@@ -1,0 +1,23 @@
+applicationName: postgresql
+namespace: hse-app
+
+service:
+  port: 5432
+  targetPort: 5432
+
+container:
+  imagePullPolicy: Always
+  name: "postgresql"
+  image: postgres
+  port: 5432
+
+database:
+  POSTGRES_DB: "blog-db"
+  POSTGRES_USER: "admin"
+  POSTGRES_PASSWORD: "admin"
+
+pvc:
+  applicationName: postgresql-pvc
+  accessModes: ReadWriteOnce
+  resources:
+    storage: 5Gi

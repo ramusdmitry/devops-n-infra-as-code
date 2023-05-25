@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comms
+  namespace: hse-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: comms
+  template:
+    metadata:
+      labels:
+        app: comms
+    spec:
+      containers:
+        - name: comms
+          imagePullPolicy: Always
+          image: registry.gitlab.com/hse_students/hse_ramus/core/comms:main
+
+          livenessProbe:
+            httpGet:
+              path: /liveness
+              port: 3032
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 3032
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          env:
+            - name: DBNAME
+              value: hse-ramus
+            - name: DBUSERNAME
+              value: dramus
+            - name: DBPASSWORD
+              value: 0%99)zX59B@5!
+            - name: DBHOST
+              value: 91.185.86.82
+            - name: DBPORT
+              value: '5432'
+            - name: SSLMODE
+              value: disable
+            - name: PORT
+              value: '8032'
+            - name: PROBES_PORT
+              value: '3032'
+
+          ports:
+             - containerPort: 8032
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+      imagePullSecrets:
+        - name: regcred

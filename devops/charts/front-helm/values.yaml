@@ -1,0 +1,13 @@
+applicationName: frontend
+namespace: core
+
+service:
+  port: 3000
+  targetPort: 3000
+
+container:
+  imagePullPolicy: Always
+  imagePullSecrets: regcred
+  name: "Frontend-app-service"
+  image: registry.gitlab.com/hse_students/hse_ramus/core/frontend:main
+  port: 3000

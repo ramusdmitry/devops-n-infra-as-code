@@ -1,0 +1,26 @@
+applicationName: group
+namespace: core
+
+service:
+  port: 8050
+  targetPort: 8050
+
+container:
+  imagePullPolicy: Always
+  imagePullSecrets: regcred
+  name: "group-app-service"
+  image: registry.gitlab.com/hse_students/hse_ramus/core/group:main
+  port: 8050
+  probes:
+    port: 3050
+    delay: 10
+    period: 5
+
+
+database:
+  DBHost: "91.185.86.82"
+  DBName: "hse-ramus"
+  Username: "dramus"
+  Password: "0%99)zX59B@5!"
+  SSLMode: "disable"
+  Port: "5432"

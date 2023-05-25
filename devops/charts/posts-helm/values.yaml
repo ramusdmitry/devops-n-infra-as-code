@@ -1,0 +1,25 @@
+applicationName: posts
+namespace: core
+
+service:
+  port: 8036
+  targetPort: 8036
+
+container:
+  imagePullPolicy: IfNotPresent
+  imagePullSecrets: regcred
+  name: "posts-app-service"
+  image: registry.gitlab.com/hse_students/hse_ramus/core/posts:main
+  port: 8036
+  probes:
+    port: 3036
+    delay: 10
+    period: 5
+
+database:
+  DBHost: "91.185.86.82"
+  DBName: "hse-ramus"
+  Username: "dramus"
+  Password: "0%99)zX59B@5!"
+  SSLMode: "disable"
+  Port: "5432"

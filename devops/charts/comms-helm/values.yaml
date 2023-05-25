@@ -1,0 +1,26 @@
+applicationName: comms
+namespace: core
+
+service:
+  port: 8032
+  targetPort: 8032
+
+container:
+  imagePullPolicy: Always
+  imagePullSecrets: regcred
+  name: "comms-app-service"
+  image: registry.gitlab.com/hse_students/hse_ramus/core/comms:main
+  port: 8032
+  probes:
+    port: 3032
+    delay: 10
+    period: 5
+
+database:
+  DBHost: "91.185.86.82"
+  DBName: "hse-ramus"
+  Username: "dramus"
+  Password: "0%99)zX59B@5!"
+  SSLMode: "disable"
+  Port: "5432"
+

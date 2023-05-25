@@ -1,0 +1,10 @@
+server:
+  port: "8050"
+
+db:
+  dbname: "blog-db"
+  host: "localhost"
+  username: "admin"
+  password: "admin"
+  port: "5432"
+  sslmode: "disable"

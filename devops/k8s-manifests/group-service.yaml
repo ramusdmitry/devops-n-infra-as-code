@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: group
+  namespace: hse-app
+  labels:
+    app: group
+spec:
+  ports:
+    - port: 8050
+      targetPort: 8050
+      protocol: TCP
+      name: "http"
+  type: ClusterIP
+  selector:
+    app: group

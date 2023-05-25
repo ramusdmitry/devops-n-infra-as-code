@@ -1,0 +1,17 @@
+server:
+  port: "8000"
+  secret_jwt: "adkskfda"
+
+db:
+  username: "admin"
+  password: "admin"
+  host: "localhost"
+  port: "5432"
+  dbname: "blog-db"
+  sslmode: "disable"
+
+probes:
+  port: 3010
+
+metrics:
+  port: 9000

@@ -1,0 +1,25 @@
+applicationName: auth
+namespace: core
+
+service:
+  port: 8080
+  targetPort: 8080
+
+container:
+  imagePullPolicy: Always
+  imagePullSecrets: regcred
+  name: "Auth-app-service"
+  image: registry.gitlab.com/hse_students/hse_ramus/core/auth:main
+  port: 8080
+  probes:
+    port: 3080
+    delay: 10
+    period: 5
+
+database:
+  DBHost: "91.185.86.82"
+  DBName: "hse-ramus"
+  Username: "dramus"
+  Password: "0%99)zX59B@5!"
+  SSLMode: "disable"
+  Port: "5432"
